@@ -56,6 +56,10 @@ colorscheme gotham256
 " fix backspace
 set backspace=2
 
+
+" fix utf8
+set encoding=utf-8
+
 " use reverse tab to find code
 nnoremap \ :Ag<SPACE>
 let g:ale_fixers = {
