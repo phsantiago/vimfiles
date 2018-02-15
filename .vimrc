@@ -1,9 +1,9 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'junegunn/fzf'
+Plugin 'scrooloose/nerdtree'
 Plugin 'styled-components/vim-styled-components'
 Plugin 'epilande/vim-react-snippets'
-Plugin 'SirVer/ultisnips'
 Plugin 'epilande/vim-es2015-snippets'
 Plugin 'pangloss/vim-javascript'
 Plugin 'gisphm/vim-gitignore'
@@ -15,6 +15,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'rking/ag.vim'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'w0rp/ale'
+Plugin 'SirVer/ultisnips'
 let g:jsx_ext_required = 0
 call vundle#end()
 
