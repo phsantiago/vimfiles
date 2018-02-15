@@ -1,13 +1,16 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/fzf'
+Plugin 'Valloric/MatchTagAlways'
 Plugin 'scrooloose/nerdtree'
 Plugin 'styled-components/vim-styled-components'
 Plugin 'epilande/vim-react-snippets'
 Plugin 'epilande/vim-es2015-snippets'
-Plugin 'pangloss/vim-javascript'
+Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'gisphm/vim-gitignore'
-Plugin 'mxw/vim-jsx'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'xolox/vim-session'
@@ -25,6 +28,9 @@ let mapleader = "\<Space>"
 
 " blessed space w to save
 nnoremap <Leader>w :w<CR>
+
+" default syntax lookout
+sy on
 
 " make sure your vim has +clipboard enabled
 " =====================================================
