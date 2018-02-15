@@ -10,7 +10,7 @@ Plugin 'gisphm/vim-gitignore'
 Plugin 'mxw/vim-jsx'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'xolox/vim-session'
+"Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 Plugin 'rking/ag.vim'
 Plugin 'whatyouhide/vim-gotham'
@@ -18,6 +18,25 @@ Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
 let g:jsx_ext_required = 0
 call vundle#end()
+
+fu! SaveSess()
+    execute 'call mkdir(~/.vim)'
+    execute 'mksession! ~/.vim/session.vim'
+endfunction
+
+fu! RestoreSess()
+execute 'so ~/.vim/session.vim'
+if bufexists(1)
+    for l in range(1, bufnr('$'))
+        if bufwinnr(l) == -1
+            exec 'sbuffer ' . l
+        endif
+    endfor
+endif
+endfunction
+
+autocmd VimLeave * call SaveSess()
+autocmd VimEnter * call RestoreSess()
 
 let g:UltiSnipsExpandTrigger="<Leader><Tab>"
 
