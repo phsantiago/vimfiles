@@ -1,26 +1,10 @@
-execute pathogen#infect()
-call pathogen#helptags()
-
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-"ES2015 code snippets (Optional)
-Plug 'epilande/vim-es2015-snippets'
-
-" React code snippets
-Plug 'epilande/vim-react-snippets'
-
-" Ultisnips
-Plug 'SirVer/ultisnips'
-
-Plug 'styled-components/vim-styled-components'
-
-
-let g:UltiSnipsExpandTrigger="<Leader><Tab>"
-call plug#end()
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'junegunn/fzf'
+Plugin 'styled-components/vim-styled-components'
+Plugin 'epilande/vim-react-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'epilande/vim-es2015-snippets'
 Plugin 'pangloss/vim-javascript'
 Plugin 'gisphm/vim-gitignore'
 Plugin 'mxw/vim-jsx'
@@ -33,6 +17,8 @@ Plugin 'whatyouhide/vim-gotham'
 Plugin 'w0rp/ale'
 let g:jsx_ext_required = 0
 call vundle#end()
+
+let g:UltiSnipsExpandTrigger="<Leader><Tab>"
 
 colorscheme gotham256
 
