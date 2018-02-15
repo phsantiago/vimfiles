@@ -10,7 +10,7 @@ Plugin 'gisphm/vim-gitignore'
 Plugin 'mxw/vim-jsx'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'editorconfig/editorconfig-vim'
-"Plugin 'xolox/vim-session'
+Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
 Plugin 'rking/ag.vim'
 Plugin 'whatyouhide/vim-gotham'
@@ -19,54 +19,65 @@ Plugin 'SirVer/ultisnips'
 let g:jsx_ext_required = 0
 call vundle#end()
 
-fu! SaveSess()
-    execute 'call mkdir(~/.vim)'
-    execute 'mksession! ~/.vim/session.vim'
-endfunction
+" yayy leader on space!!!
+" easy to use, both fingers to press
+let mapleader = "\<Space>"
 
-fu! RestoreSess()
-execute 'so ~/.vim/session.vim'
-if bufexists(1)
-    for l in range(1, bufnr('$'))
-        if bufwinnr(l) == -1
-            exec 'sbuffer ' . l
-        endif
-    endfor
-endif
-endfunction
+" blessed space w to save
+nnoremap <Leader>w :w<CR>
 
-autocmd VimLeave * call SaveSess()
-autocmd VimEnter * call RestoreSess()
+" make sure your vim has +clipboard enabled
+" =====================================================
+" espace double c to copy a selection
+map <leader>cc "+y<CR>
 
+" espace double p to paste IDENTED! Work like charm. 
+map <leader>pp "+p<CR>
+" =====================================================
+
+" v to expand select
+vmap v <Plug>(expand_region_expand)
+
+" V to retract select
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" disable line break to better code reading
+set nowrap
+
+" auto save session every 10sec
+let g:session_autosave_periodic = 10
+
+" auto complete with space and tab
 let g:UltiSnipsExpandTrigger="<Leader><Tab>"
 
+" theme with blue letters and dark bg
 colorscheme gotham256
 
+" fix backspace
+set backspace=2
+
+" use reverse tab to find code
 nnoremap \ :Ag<SPACE>
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 
+" fix lint on save
 let g:ale_fix_on_save = 1
-
-let mapleader = "\<Space>"
-nnoremap <Leader>w :w<CR>
-map <leader>cc "+y<CR>
-map <leader>pp "+p<CR>
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
-set nowrap
 
 " auto reload files when changes outside vim
 set autoread
-
-"set tabstop=4       " The width of a TAB is set to 4.
-"set shiftwidth=4    " Indents will have a width of 4
-"set softtabstop=4   " Sets the number of columns for a TAB
-"set expandtab 
-noremap <F4> :set hlsearch! hlsearch?<CR>
-noremap <C-p> :FZF <CR>
 set ai
+
+" F4 to toggle a highlight on search result
+noremap <F4> :set hlsearch! hlsearch?<CR>
+
+" ctrl p to find files
+noremap <C-p> :FZF <CR>
+
+" Make a simple "search" text object.
+" http://vim.wikia.com/wiki/Copy_or_change_search_hit
+" It allows for replacing search matches with cs and then /././.
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap s :normal vs<CR>
