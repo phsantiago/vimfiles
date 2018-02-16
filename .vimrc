@@ -18,6 +18,9 @@ Plugin 'xolox/vim-misc'
 Plugin 'rking/ag.vim'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'w0rp/ale'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'mattn/emmet-vim'
 Plugin 'SirVer/ultisnips'
 let g:jsx_ext_required = 0
 call vundle#end()
