@@ -21,6 +21,7 @@ Plugin 'w0rp/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mattn/emmet-vim'
+Plugin 'wakatime/vim-wakatime'
 Plugin 'SirVer/ultisnips'
 let g:jsx_ext_required = 0
 call vundle#end()
