@@ -3,6 +3,8 @@ call vundle#begin()
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/fzf'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Quramy/vim-js-pretty-template'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'scrooloose/nerdtree'
 Plugin 'styled-components/vim-styled-components'
@@ -104,3 +106,6 @@ set tabstop=2
 set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
+
+"ignore gitignore files on fzf
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
