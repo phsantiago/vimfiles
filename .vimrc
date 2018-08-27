@@ -109,3 +109,8 @@ set shiftwidth=2
 
 "ignore gitignore files on fzf
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+iabbr dbg debugger //eslint-disable-line
+
+" line number
+set number relativenumber
