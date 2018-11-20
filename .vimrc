@@ -1,32 +1,36 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'junegunn/fzf'
-Plugin 'tpope/vim-fugitive'
+Plugin 'ElmCast/elm-vim'
+Plugin 'moll/vim-node'
 Plugin 'Quramy/vim-js-pretty-template'
 Plugin 'Valloric/MatchTagAlways'
-Plugin 'scrooloose/nerdtree'
-Plugin 'styled-components/vim-styled-components'
-Plugin 'epilande/vim-react-snippets'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'epilande/vim-es2015-snippets'
+Plugin 'epilande/vim-react-snippets'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'flowtype/vim-flow'
+Plugin 'gisphm/vim-gitignore'
+Plugin 'junegunn/fzf'
+Plugin 'mattn/emmet-vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'sergioramos/jsctags'
+Plugin 'styled-components/vim-styled-components'
 Plugin 'terryma/vim-expand-region'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'gisphm/vim-gitignore'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
-Plugin 'rking/ag.vim'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'w0rp/ale'
+Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mattn/emmet-vim'
+Plugin 'w0rp/ale'
 Plugin 'wakatime/vim-wakatime'
-Plugin 'SirVer/ultisnips'
-let g:jsx_ext_required = 0
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 call vundle#end()
+let g:jsx_ext_required = 0
 
 " yayy leader on space!!!
 " easy to use, both fingers to press
@@ -41,10 +45,10 @@ sy on
 " make sure your vim has +clipboard enabled
 " =====================================================
 " espace double c to copy a selection
-map <leader>cc "+y<CR>
+map <leader><leader>c "+y<CR>
 
 " espace double p to paste IDENTED! Work like charm. 
-map <leader>pp "+p<CR>
+map <leader><leader>v "+p<CR>
 " =====================================================
 
 " v to expand select
@@ -68,15 +72,31 @@ colorscheme gotham256
 " fix backspace
 set backspace=2
 
-
 " fix utf8
 set encoding=utf-8
 
 " use reverse tab to find code
 nnoremap \ :Ag<SPACE>
+
+" ale rules
+let g:ale_linters = {
+\  'javascript': ['eslint', 'flow'],
+\}
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = '🐞' " could use emoji
+let g:ale_sign_warning = '👉' " could use emoji
+let g:ale_statusline_format = ['X %d', '? %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
+
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 " fix lint on save
 let g:ale_fix_on_save = 1
@@ -110,7 +130,33 @@ set shiftwidth=2
 "ignore gitignore files on fzf
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
+" snippet to debug js
 iabbr dbg debugger //eslint-disable-line
 
 " line number
 set number relativenumber
+
+
+
+
+
+
+
+
+
+" General conceal settings. Will keep things concealed
+" even when your cursor is on top of them.
+set conceallevel=1
+set concealcursor=nvic
+
+" vim-javascript conceal settings.
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
