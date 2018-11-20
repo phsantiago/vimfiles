@@ -13,7 +13,7 @@ Plugin 'gisphm/vim-gitignore'
 Plugin 'junegunn/fzf'
 Plugin 'mattn/emmet-vim'
 Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sergioramos/jsctags'
@@ -147,16 +147,10 @@ set number relativenumber
 " General conceal settings. Will keep things concealed
 " even when your cursor is on top of them.
 set conceallevel=1
-set concealcursor=nvic
 
 " vim-javascript conceal settings.
 let g:javascript_conceal_function             = "ƒ"
 let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_this                 = "@"
-let g:javascript_conceal_return               = "⇚"
-let g:javascript_conceal_undefined            = "¿"
 let g:javascript_conceal_NaN                  = "ℕ"
-let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "•"
-let g:javascript_conceal_super                = "Ω"
-let g:javascript_conceal_arrow_function       = "⇒"
+let g:javascript_conceal_noarg_arrow_function = "λ"
+let g:javascript_conceal_arrow_function       = "👉"
