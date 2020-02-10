@@ -1,32 +1,40 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+"Plugin 'flowtype/vim-flow'
 Plugin 'ElmCast/elm-vim'
-Plugin 'moll/vim-node'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'Shougo/denite.nvim'
 Plugin 'Quramy/vim-js-pretty-template'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'epilande/vim-es2015-snippets'
 Plugin 'epilande/vim-react-snippets'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'flowtype/vim-flow'
+Plugin 'Quramy/tsuquyomi'
 Plugin 'gisphm/vim-gitignore'
 Plugin 'junegunn/fzf'
 Plugin 'mattn/emmet-vim'
+Plugin 'metakirby5/codi.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'moll/vim-node'
 Plugin 'mxw/vim-jsx'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'rking/ag.vim'
+Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sergioramos/jsctags'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'styled-components/vim-styled-components'
 Plugin 'terryma/vim-expand-region'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tomarrell/vim-npr'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0rp/ale'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'whatyouhide/vim-gotham'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 call vundle#end()
@@ -38,6 +46,16 @@ let mapleader = "\<Space>"
 
 " blessed space w to save
 nnoremap <Leader>w :w<CR>
+
+function MyNerdToggle()
+    if &filetype == 'nerdtree'
+        :NERDTreeToggle
+    else
+        :NERDTreeFind
+    endif
+endfunction
+
+nnoremap <Leader>n :call MyNerdToggle()<CR>
 
 " default syntax lookout
 sy on
@@ -76,15 +94,18 @@ set backspace=2
 set encoding=utf-8
 
 " use reverse tab to find code
-nnoremap \ :Ag<SPACE>
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+nnoremap \ :Ack!<SPACE>
 
 " ale rules
 let g:ale_linters = {
-\  'javascript': ['eslint', 'flow'],
+\  'javascript': ['eslint'],
 \}
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\}
+"  'javascript': ['eslint', 'flow'],
+let b:ale_fixers = ['prettier', 'eslint']
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_sign_error = '🐞' " could use emoji
@@ -100,6 +121,7 @@ nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 " fix lint on save
 let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_use_local_config = 1
 
 " auto reload files when changes outside vim
 set autoread
@@ -136,11 +158,14 @@ iabbr dbg debugger //eslint-disable-line
 " line number
 set number relativenumber
 
+" disable annoying error bell
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 
 
-
-
+nmap <silent> <leader>j :ALENext<cr>
+nmap <silent> <leader>k :ALEPrevious<cr>
 
 
 
@@ -149,8 +174,18 @@ set number relativenumber
 set conceallevel=1
 
 " vim-javascript conceal settings.
-let g:javascript_conceal_function             = "ƒ"
-let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_NaN                  = "ℕ"
-let g:javascript_conceal_noarg_arrow_function = "λ"
-let g:javascript_conceal_arrow_function       = "👉"
+"let g:javascript_conceal_function             = "ƒ"
+"let g:javascript_conceal_null                 = "ø"
+"let g:javascript_conceal_NaN                  = "ℕ"
+"let g:javascript_conceal_noarg_arrow_function = "λ"
+"let g:javascript_conceal_arrow_function       = "👉"
+"let g:flow#autoclose = 1
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+" read project vimrc
+set exrc
+set secure
